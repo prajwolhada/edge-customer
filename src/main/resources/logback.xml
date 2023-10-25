@@ -1,0 +1,33 @@
+<configuration>
+    <property resource="bankxp-logback.properties"/>
+    <!-- Define the file appender -->
+    <appender name="fileAppender" class="ch.qos.logback.core.FileAppender">
+        <file>your-application.log</file> <!-- The name of the log file -->
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Define the console appender -->
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Set the root logger level and attach appenders -->
+    <logger name="com.f1soft.bankxp" level="debug">
+        <appender-ref ref="fileAppender"/> <!-- Attach the file appender -->
+        <appender-ref ref="consoleAppender"/> <!-- Attach the console appender -->
+    </logger>
+
+    <logger name="org.hibernate" level="info">
+        <appender-ref ref="fileAppender"/>
+        <appender-ref ref="consoleAppender"/>
+    </logger>
+
+    <logger name="org.springframework" level="info">
+        <appender-ref ref="fileAppender"/>
+        <appender-ref ref="consoleAppender"/>
+    </logger>
+</configuration>

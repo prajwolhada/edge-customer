@@ -1,0 +1,10 @@
+spring:
+  profiles.active: dev
+  main.allow-bean-definition-overriding: true
+
+server:
+  port: 8099
+  servlet:
+    context-path: /
+
+allowed.origins: '*'
