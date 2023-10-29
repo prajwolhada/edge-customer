@@ -25,7 +25,7 @@ pipeline {
                     }
                 }
 
-                stage('Push') {
+        stage('Push') {
                     steps {
                         script {
                             docker.withRegistry('https://your-registry-url', 'your-registry-credentials') {
@@ -34,6 +34,5 @@ pipeline {
                         }
                     }
                 }
-        }
     }
 }
