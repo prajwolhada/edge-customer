@@ -22,6 +22,7 @@ pipeline {
                     steps {
                         script {
                             def dockerImage = docker.build('your-docker-image-name:tag', '-f /Users/f1-imac/bankxp/harbor-java17/harbor-customer-edge/Dockerfile .')
+                            docker build -t your-docker-image-name:tag -f /Users/f1-imac/bankxp/harbor-java17/harbor-customer-edge/Dockerfile .
                         }
                     }
                 }
