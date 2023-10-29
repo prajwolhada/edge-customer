@@ -21,7 +21,7 @@ pipeline {
         stage('Build Image') {
                     steps {
                         script {
-                            sh 'docker build -t your-docker-image-name:tag -f /var/jenkins_home/bankxp/harbor-java17/harbor-customer-edge/Dockerfile /var/jenkins_home/workspace/customer-edge-pipeline'
+                            sh 'docker build -t your-docker-image-name:tag -f /var/jenkins_home/bankxp/harbor-java17/harbor-customer-edge/Dockerfile /var/jenkins_home/workspace/customer-edge-pipeline/'
                         }
                     }
                 }
