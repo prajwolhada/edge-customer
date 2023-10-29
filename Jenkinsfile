@@ -17,11 +17,20 @@ pipeline {
                 sh 'mvn clean install -DskipTests'
             }
         }
-        stage('Build Docker Image') {
+        stage('Build') {
                     steps {
                         script {
-                            // Build the Docker image
-                            sh "docker build -t $DOCKER_IMAGE_NAME -f $DOCKERFILE_PATH ."
+                            def dockerImage = docker.build('your-docker-image-name:tag', '-f /Users/f1-imac/bankxp/harbor-java17/harbor-customer-edge/Dockerfile .')
+                        }
+                    }
+                }
+
+                stage('Push') {
+                    steps {
+                        script {
+                            docker.withRegistry('https://your-registry-url', 'your-registry-credentials') {
+                                dockerImage.push()
+                            }
                         }
                     }
                 }
