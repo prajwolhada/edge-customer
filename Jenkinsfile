@@ -33,24 +33,24 @@ pipeline {
               sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=BankXP -Dsonar.projectName="Customer-Edge" -Dsonar.host.url=http://10.13.194.71:9001 -Dsonar.token=sqa_de75c641a2704a51be32122ad4d6c9763dd84508'
            }
         }
-        stage('Build Docker Image') {
+        stage('Build and Push Docker Image') {
                     steps {
                         script {
+                            def registryUrl=
+
+                            // Define your Docker image name and tag
+                            def dockerImageName = 'your-docker-image:latest'
+                            def tag = currentBuild.number
+                            def dockerImage = dockerImageName + ':' + 'tag'
+
                             // Build the Docker image
-                            sh "docker build -t $DOCKER_IMAGE_NAME -f $DOCKERFILE_PATH ."
+                            docker.build(dockerImage, '-f /Users/f1-imac/bankxp/harbor-java17/harbor-customer-edge/Dockerfile .')
+
+                            // Tag the image with the registry URL and desired tag
+                            def registryImage = "http://10.13.194.56/" + dockerImage
+                            docker.image(dockerImage).push(registryImage)
                         }
                     }
-        }
-        stage('Push Docker Image to Registry') {
-                    steps {
-                        script {
-                            // Authenticate with your Docker registry
-                            withDockerRegistry(credentialsId: DOCKER_REGISTRY_CREDENTIALS, url: "https://10.13.194.56") {
-                                // Push the Docker image to the registry
-                                sh "docker push $DOCKER_IMAGE_NAME"
-                            }
-                          }
-                    }
-        }
+                }
     }
 }
