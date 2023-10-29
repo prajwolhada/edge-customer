@@ -1,7 +1,5 @@
 pipeline {
     agent any
-    }
-
     environment {
             DOCKER_REGISTRY_CREDENTIALS = credentials('Harbor')
             DOCKER_IMAGE_NAME = 'customer-edge'
