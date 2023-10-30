@@ -14,7 +14,7 @@ pipeline {
         stage('Build Image') {
                     steps {
                         script {
-                            sh 'docker build -t testbankxp1 --file=/Users/f1-imac/jenkins_home/bankxp/harbor-java17/harbor-customer-edge/Dockerfile /Users/f1-imac/jenkins_home/workspace/customer-edge-pipeline'
+                            sh 'docker build -t testbankxp1 --file=/var/jenkins_home/bankxp/harbor-java17/harbor-customer-edge/Dockerfile /var/jenkins_home/workspace/customer-edge-pipeline'
                         }
                     }
                 }
