@@ -7,7 +7,7 @@ pipeline {
         }
 
     environment {
-           IMAGE_NAME = 'dev-registry.f1soft.com/customer-edge'
+           IMAGE_NAME = 'dev-registry.f1soft.com/bankxp/customer-edge'
            BUILD_NUMBER = currentBuild.number.toString()
            REGISTRY_CREDENTIAL_ID = 'bankxp-harbor-credential'
            REGISTRY_URL = 'https://dev-registry.f1soft.com'
