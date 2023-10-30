@@ -32,7 +32,7 @@ pipeline {
                     steps {
                         script {
                             withCredentials([usernamePassword(credentialsId: ${REGISTRY_CREDENTIAL_ID}, passwordVariable: 'DOCKER_REGISTRY_PASSWORD', usernameVariable: 'DOCKER_REGISTRY_USERNAME')]) {
-                                sh "docker login -u $DOCKER_REGISTRY_USERNAME -p $DOCKER_REGISTRY_PASSWORD ${REGISTRY_URL}"
+                                sh "docker login -u ${DOCKER_REGISTRY_USERNAME} -p ${DOCKER_REGISTRY_PASSWORD} ${REGISTRY_URL}"
 
                                 // Push the Docker image to the registry
                                 sh "docker push ${IMAGE_NAME}:${BUILD_NUMBER}"
