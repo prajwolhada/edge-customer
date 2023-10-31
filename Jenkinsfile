@@ -44,10 +44,12 @@ pipeline {
                 steps {
                         script {
                              deployToRancher("${IMAGE_NAME}:${BUILD_NUMBER}", "${WORKLOAD_NAME}")
-                             deployToRancher("${IMAGE_NAME}:${BUILD_NUMBER}", "${WORKLOAD_NAME}")
                                }
-
                        }
         }
     }
+}
+
+def deployToRancher(image, workload) {
+    rancherRedeploy alwaysPull: true, credential: "rancherCredential", images: image, workload: workload
 }
