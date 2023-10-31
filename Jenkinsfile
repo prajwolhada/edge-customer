@@ -42,11 +42,12 @@ pipeline {
                 }
         stage('DeployToRancher') {
                 steps {
-                                script {
-                                     deployToRancher("${IMAGE_NAME}:${BUILD_NUMBER}", "${WORKLOAD_NAME}")
-                                     deployToRancher("${IMAGE_NAME}:${BUILD_NUMBER}", "${WORKLOAD_NAME}")
-                                     }
+                        script {
+                             deployToRancher("${IMAGE_NAME}:${BUILD_NUMBER}", "${WORKLOAD_NAME}")
+                             deployToRancher("${IMAGE_NAME}:${BUILD_NUMBER}", "${WORKLOAD_NAME}")
+                               }
 
+                       }
         }
     }
 }
