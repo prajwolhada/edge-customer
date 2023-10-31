@@ -51,5 +51,5 @@ pipeline {
 }
 
 def deployToRancher(image, workload) {
-    rancherRedeploy alwaysPull: true, credential: "rancherCredential", images: image, workload: workload
+    rancherRedeploy alwaysPull: true, credential: "bankxp-rancher", images: image, workload: workload
 }
