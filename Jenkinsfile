@@ -20,6 +20,24 @@ pipeline {
                 sh 'mvn clean install -DskipTests'
             }
         }
+
+        stage('Unit Test') {
+             steps {
+                        sh 'mvn test'
+             }
+                    post {
+                        always {
+                            junit 'target/surefire-reports/*.xml'
+                        }
+                    }
+             }
+
+        stage('SonarQube Analysis') {
+             steps {
+                      sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=BankXP -Dsonar.projectName="Customer-Edge" -Dsonar.host.url=http://10.13.194.71:9001 -Dsonar.token=sqa_de75c641a2704a51be32122ad4d6c9763dd84508'
+             }
+        }
+
         stage('Build Image') {
                steps {
                        script {
@@ -28,6 +46,7 @@ pipeline {
                         }
                     }
         }
+
         stage('Push Image') {
                steps {
                         script {
@@ -40,12 +59,13 @@ pipeline {
                         }
                     }
                 }
-        stage('DeployToRancher') {
+
+        stage('Deploy To Rancher') {
                 steps {
                         script {
                              deployToRancher("${IMAGE_NAME}:${BUILD_NUMBER}", "${WORKLOAD_NAME}")
                                }
-                       }
+                }
         }
     }
 }
