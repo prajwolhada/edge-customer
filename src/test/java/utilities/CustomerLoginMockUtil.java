@@ -1,6 +1,9 @@
 package utilities;
 
-import com.flsoft.bankxp.edge.entities.model.*;
+import com.flsoft.bankxp.edge.entities.model.ApplicationPattern;
+import com.flsoft.bankxp.edge.entities.model.ApplicationUser;
+import com.flsoft.bankxp.edge.entities.model.CustomerLogin;
+import com.flsoft.bankxp.edge.entities.model.LoginAccessChannel;
 
 import java.util.ArrayList;
 import java.util.Date;

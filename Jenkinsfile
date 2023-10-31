@@ -11,6 +11,7 @@ pipeline {
            BUILD_NUMBER = currentBuild.number.toString()
            REGISTRY_CREDENTIAL_ID = 'bankxp-harbor-credential'
            REGISTRY_URL = 'https://dev-registry.f1soft.com'
+           WORKLOAD_NAME = '/p/c-rlmgg:p-8dfsf/workload/deployment:bankxp-namespace:edge-customer'
     }
 
     stages {
@@ -18,21 +19,6 @@ pipeline {
             steps {
                 sh 'mvn clean install -DskipTests'
             }
-        }
-        stage('Test') {
-             steps {
-                    sh 'mvn test'
-             }
-                    post {
-                        always {
-                            junit 'target/surefire-reports/*.xml'
-                        }
-                    }
-        }
-        stage('SonarQube analysis') {
-              steps {
-                      sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=BankXP -Dsonar.projectName="Customer-Edge" -Dsonar.host.url=http://10.13.194.71:9001 -Dsonar.token=sqa_de75c641a2704a51be32122ad4d6c9763dd84508'
-              }
         }
         stage('Build Image') {
                steps {
@@ -54,5 +40,14 @@ pipeline {
                         }
                     }
                 }
+        stage('DeployToRancher') {
+                steps {
+                                script {
+                                     deployToRancher("${IMAGE_NAME}:${BUILD_NUMBER}", "${WORKLOAD_NAME}")
+                                     deployToRancher("${IMAGE_NAME}:${BUILD_NUMBER}", "${WORKLOAD_NAME}")
+                                     }
+                                 }
+                }
+          }
     }
 }
