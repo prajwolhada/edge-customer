@@ -11,7 +11,7 @@ pipeline {
            BUILD_NUMBER = currentBuild.number.toString()
            REGISTRY_CREDENTIAL_ID = 'bankxp-harbor-credential'
            REGISTRY_URL = 'https://dev-registry.f1soft.com'
-           WORKLOAD_NAME = '/p/c-rlmgg:p-8dfsf/workload/deployment:bankxp-namespace:edge-customer'
+           WORKLOAD_NAME = '/project/c-rlmgg:p-8dfsf/workload/deployment:bankxp-namespace:edge-customer'
     }
 
     stages {
