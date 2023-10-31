@@ -46,8 +46,7 @@ pipeline {
                                      deployToRancher("${IMAGE_NAME}:${BUILD_NUMBER}", "${WORKLOAD_NAME}")
                                      deployToRancher("${IMAGE_NAME}:${BUILD_NUMBER}", "${WORKLOAD_NAME}")
                                      }
-                                 }
-                }
-          }
+
+        }
     }
 }
