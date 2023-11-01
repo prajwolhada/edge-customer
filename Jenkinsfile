@@ -41,8 +41,8 @@ pipeline {
         stage('Build Image') {
                steps {
                        script {
-                            sh 'cp /Users/f1-imac/bankxp/harbor-java17/harbor-customer-edge/Dockerfile /Users/f1-imac/.jenkins/workspace/customer-edge/target'
-                            sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -f target/Dockerfile /Users/f1-imac/.jenkins/workspace/customer-edge/target/"
+                            sh 'cp /Users/f1-imac/bankxp/harbor-java17/harbor-customer-edge/Dockerfile /Users/f1-imac/.jenkins/workspace/edge-customer/target'
+                            sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -f target/Dockerfile /Users/f1-imac/.jenkins/workspace/edge-customer/target/"
                         }
                     }
         }
