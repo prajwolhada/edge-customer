@@ -11,6 +11,8 @@ pipeline {
            BUILD_NUMBER = currentBuild.number.toString()
            REGISTRY_CREDENTIAL_ID = 'bankxp-harbor-credential'
            REGISTRY_URL = 'https://dev-registry.f1soft.com'
+           DOCKER_FILE = '/Users/f1-imac/bankxp/harbor-java17/harbor-customer-edge/Dockerfile'
+           JAR_FILE_DIRECTORY = '/Users/f1-imac/.jenkins/workspace/edge-customer/target'
            WORKLOAD_NAME = '/project/c-rlmgg:p-8dfsf/workload/deployment:bankxp-namespace:edge-customer'
     }
 
@@ -24,8 +26,8 @@ pipeline {
         stage('Build Image') {
                steps {
                        script {
-                            sh 'cp /Users/f1-imac/bankxp/harbor-java17/harbor-customer-edge/Dockerfile /Users/f1-imac/.jenkins/workspace/edge-customer/target'
-                            sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -f target/Dockerfile /Users/f1-imac/.jenkins/workspace/edge-customer/target/"
+                            sh "cp ${DOCKER_FILE} ${JAR_FILE_DIRECTORY}"
+                            sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -f target/Dockerfile ${JAR_FILE_DIRECTORY}"
                         }
                     }
         }
