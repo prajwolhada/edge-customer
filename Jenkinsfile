@@ -36,8 +36,8 @@ pipeline {
                steps {
                         script {
                             withCredentials([string(credentialsId: 'bankxp-harbor-credential', variable: 'SECRET_TEXT')]) {
-                                                            sh "docker login -u _ -p ${SECRET_TEXT} ${REGISTRY_URL}"
-                            								sh "docker push ${IMAGE_NAME}:${BUILD_NUMBER}"
+                                      sh "docker login -u _ -p ${SECRET_TEXT} ${REGISTRY_URL}"
+                                      sh "docker push ${IMAGE_NAME}:${BUILD_NUMBER}"
                                }
                         }
                     }
