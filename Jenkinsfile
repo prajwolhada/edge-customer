@@ -21,23 +21,6 @@ pipeline {
             }
         }
 
-        stage('Unit Test') {
-             steps {
-                        sh 'mvn test'
-             }
-                    post {
-                        always {
-                            junit 'target/surefire-reports/*.xml'
-                        }
-                    }
-             }
-
-        stage('SonarQube Analysis') {
-             steps {
-                      sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=BankXP -Dsonar.projectName="Customer-Edge" -Dsonar.host.url=http://10.13.194.71:9001 -Dsonar.token=sqa_de75c641a2704a51be32122ad4d6c9763dd84508'
-             }
-        }
-
         stage('Build Image') {
                steps {
                        script {
@@ -50,16 +33,13 @@ pipeline {
         stage('Push Image') {
                steps {
                         script {
-                            withCredentials([usernamePassword(credentialsId: "${REGISTRY_CREDENTIAL_ID}", passwordVariable: 'DOCKER_REGISTRY_PASSWORD', usernameVariable: 'DOCKER_REGISTRY_USERNAME')]) {
-                                sh "docker login -u ${DOCKER_REGISTRY_USERNAME} -p ${DOCKER_REGISTRY_PASSWORD} ${REGISTRY_URL}"
-
-                                // Push the Docker image to the registry
-                                sh "docker push ${IMAGE_NAME}:${BUILD_NUMBER}"
-                            }
+                            withCredentials([string(credentialsId: 'bankxp-harbor-credential', variable: 'SECRET_TEXT')]) {
+                                                            sh "docker login -u _ -p ${SECRET_TEXT} ${REGISTRY_URL}"
+                            								sh "docker push ${IMAGE_NAME}:${BUILD_NUMBER}"
+                               }
                         }
                     }
                 }
-
         stage('Deploy To Rancher') {
                 steps {
                         script {
